@@ -1,0 +1,46 @@
+.card {
+    width: 400px;
+    height: 500px;
+    margin: 20px;
+    transition: opacity 150ms;
+    background-color: #eef1ea;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.card:hover {
+    opacity: 50%;
+}
+
+.image {
+    display: block;
+    width: 400px;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.title {
+    width: 400px;
+    font-weight: lighter;
+    color: #382C1A;
+    text-align: left;
+    height: fit-content;
+}
+
+.description {
+    width: 400px;
+    height: fit-content;
+    color: #382C1A;
+    text-align: left;
+}
+
+.foot-text {
+    color: gray;
+}
+
+.foot {
+    display: flex;
+    gap: 20px;
+}
