@@ -16,9 +16,6 @@ function NavBar() {
                         <Link to= "/about" className='styled-link'>ABOUT</Link>
                     </li>
                     <li className='nav-item'>
-                        <Link to ="/search" className='styled-link'>Search</Link>
-                    </li>
-                    <li className='nav-item'>
                         <Link to= "/profile" className='styled-link'>PROFILE</Link>
                     </li>
                 </ul>

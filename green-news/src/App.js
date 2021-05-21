@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ActivityIndicator } from 'react-native';
+import { FlatList, ActivityIndicator, View } from 'react-native';
 import { getNews } from './news';
 import Article from './components/Article';
 import Navbar from './components/Navbar';
@@ -15,7 +15,7 @@ export class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { articles: [], refreshing: true, pageNum: 1 };
+    this.state = { news: [], refreshing: true, pageNum: 1, loadedMore: false };
     this.fetchNews = this.fetchNews.bind(this);
   }
 
@@ -24,9 +24,10 @@ export class App extends React.Component {
   }
 
   fetchNews() {
+    var currentNews = this.state.news;
     getNews(this.state.pageNum)
-      .then(articles => this.setState({ articles, refreshing: false}))
-      .catch(() => this.setState({ refreshing: false }));
+      .then(articles => this.setState({ news: currentNews.concat(articles), refreshing: false, loadedMore: false}))
+      .catch(() => this.setState({ refreshing: false, loadedMore: false }));
   }
 
   handleRefresh() {
@@ -37,16 +38,14 @@ export class App extends React.Component {
   }
 
   _handleLoadMore = () => {
-    if (this.state.refreshing){
+    if (this.state.refreshing || this.state.loadedMore){
       return null;
     }
     this.setState(
       (prevState) => {
-        return { refreshing: true, pageNum: prevState.pageNum + 1};
+        return { refreshing: true, pageNum: prevState.pageNum + 1, loadedMore: true}
       },
-      () => {
-        this.fetchNews();
-      }
+      () => this.fetchNews()
     );
   };
 
@@ -60,23 +59,28 @@ export class App extends React.Component {
 
   render () {
     var col = Math.floor(window.innerWidth / 440);
+
     return (
       <Router>
         <Navbar/>
+        <input type="text" id="searchbar" placeholder="Search news..." name="s" ></input>
         <div className="container">
-        <FlatList
-          data={this.state.articles}
-          renderItem={({ item }) => <Article article={item} />}
-          keyExtractor={item => item.url}
-          refreshing={this.state.refreshing}
-          onRefresh={this.handleRefresh.bind(this)}
-          numColumns={col}
-          key={col}
-          contentContainerStyle={{ alignItems: "center" }}
-          ListFooterComponent={this.renderFooter}
-          onEndReached={this._handleLoadMore}
-          onEndReachedThreshold={0.1}
-        />
+          <View style={{flex:1, height: window.innerHeight, overflow: 'hidden'}}>
+            <FlatList
+              data={this.state.news}
+              renderItem={({ item }) => <Article article={item} />}
+              keyExtractor={item => item.url}
+              refreshing={this.state.refreshing}
+              onRefresh={this.handleRefresh.bind(this)}
+              numColumns={col}
+              key={col}
+              contentContainerStyle={{ alignItems: "center" }}
+              ListFooterComponent={this.renderFooter}
+              onEndReached={this._handleLoadMore}
+              onEndReachedThreshold={0.5}
+              onMomentumScrollBegin = { () => {this.setState({loadedMore: false})}}
+            />
+          </View>
         </div>
       </Router>
     );

@@ -22,27 +22,35 @@
 }
 
 .title {
-    width: 400px;
-    font-weight: lighter;
+    width: 380px;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 10px;
     color: #382C1A;
     text-align: left;
     height: fit-content;
 }
 
 .description {
-    width: 400px;
+    width: 380px;
+    margin: 10px;
+    position: absolute;
+    top: 300px;
     height: fit-content;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: lighter;
     color: #382C1A;
     text-align: left;
 }
 
 .foot-text {
     color: gray;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .foot {
     display: flex;
     position: absolute;
+    margin: 10px;
     bottom: 0;
     gap: 20px;
 }
