@@ -1,7 +1,8 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import { getNews } from './news';
 import Article from './components/Article';
+import Navbar from './components/Navbar';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,18 +15,18 @@ export class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { articles: [], refreshing: true };
+    this.state = { articles: [], refreshing: true, pageNum: 1 };
     this.fetchNews = this.fetchNews.bind(this);
   }
 
   componentDidMount() {
-    this.fetchNews();
+    this.fetchNews(1);
   }
 
   fetchNews() {
-    getNews()
+    getNews(this.state.pageNum)
       .then(articles => this.setState({ articles, refreshing: false}))
-      .catch(() => this.setState({ refreshing: false}));
+      .catch(() => this.setState({ refreshing: false }));
   }
 
   handleRefresh() {
@@ -35,20 +36,48 @@ export class App extends React.Component {
     );
   }
 
+  _handleLoadMore = () => {
+    if (this.state.refreshing){
+      return null;
+    }
+    this.setState(
+      (prevState) => {
+        return { refreshing: true, pageNum: prevState.pageNum + 1};
+      },
+      () => {
+        this.fetchNews();
+      }
+    );
+  };
+
+  renderFooter = () => {
+    if (this.state.refreshing) {
+      return <ActivityIndicator size="large" />;
+    } else {
+      return null;
+    }
+  };
+
   render () {
+    var col = Math.floor(window.innerWidth / 440);
     return (
       <Router>
-      <div>
+        <Navbar/>
+        <div className="container">
         <FlatList
           data={this.state.articles}
           renderItem={({ item }) => <Article article={item} />}
           keyExtractor={item => item.url}
           refreshing={this.state.refreshing}
           onRefresh={this.handleRefresh.bind(this)}
-          numColumns={3}
-          contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+          numColumns={col}
+          key={col}
+          contentContainerStyle={{ alignItems: "center" }}
+          ListFooterComponent={this.renderFooter}
+          onEndReached={this._handleLoadMore}
+          onEndReachedThreshold={0.1}
         />
-      </div>
+        </div>
       </Router>
     );
   }
