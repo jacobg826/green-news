@@ -16,12 +16,14 @@
     align-items: center;
     height: 80px;
     background-color: #25395D;
-    border-bottom: 5px solid #25395D;
+    position: relative;
+    box-shadow: 0 4px 2px -2px gray;
   }
   
   .navbar-logo {
     color: #FBF4E6;
     font: 24px Roboto;
+    width: 200px;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;

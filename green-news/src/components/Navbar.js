@@ -9,14 +9,11 @@ function NavBar() {
         <nav className='navBar'>
             <div className='navbar-container'>
                 <Link to="/" className='navbar-logo'>
-                    EARTH NEWS
+                    earth news
                 </Link>
                 <ul className='nav-menu'>
                     <li className='nav-item'>
-                        <Link to= "/about" className='styled-link'>ABOUT</Link>
-                    </li>
-                    <li className='nav-item'>
-                        <Link to= "/profile" className='styled-link'>PROFILE</Link>
+                        <Link to= "/about" className='styled-link'>about</Link>
                     </li>
                 </ul>
             </div>
