@@ -3,7 +3,8 @@
     height: 500px;
     margin: 20px;
     transition: opacity 150ms;
-    background-color: #eef1ea;
+   /* background-color: #eef1ea;*/
+    background-color: #FBF4E6;
     text-decoration: none;
     border-radius: 10px;
 }

@@ -1,0 +1,64 @@
+.header {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: #7ECED4;
+    width: 100vw;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.head-text {
+    color: #FBF4E6;
+    font: 24px Roboto;
+    width: 85vw;
+    font-size: 6rem;
+}
+
+.text-background {
+    background-color: #7ECED4;
+    padding: 20px;
+}
+
+.text-body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.about-text {
+    width: 85Vw;
+    max-width: 700px;
+    font: 24px Roboto;
+}
+
+.coast {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    min-width: 400px;
+}
+
+.red-section {
+    display:grid;
+    background-color: #EB5653;
+    width: 100vw;
+    min-height: 700px;
+    height: fit-content;
+    justify-content: center;
+}
+
+.red-text {
+    color: #FBF4E6;
+    font: 24px Roboto;
+    width: 85vw;
+    font-size: 5rem;
+
+}
+
+.page-layout {
+    width: 100vw;
+}

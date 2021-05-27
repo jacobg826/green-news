@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, ActivityIndicator, View } from 'react-native';
 import { getNews } from './news';
 import Article from './components/Article';
+import About from './components/about';
 import Navbar from './components/Navbar';
 import {
   BrowserRouter as Router,
@@ -59,29 +60,38 @@ export class App extends React.Component {
 
   render () {
     var col = Math.floor(window.innerWidth / 440);
-
+    // <View style={{flex:1, height: window.innerHeight, overflow: 'hidden'}}> 
+    // add that above the flatlist for infinite scroll
     return (
       <Router>
         <Navbar/>
-        <input type="text" id="searchbar" placeholder="Search news..." name="s" ></input>
-        <div className="container">
-          <View style={{flex:1, height: window.innerHeight, overflow: 'hidden'}}>
-            <FlatList
-              data={this.state.news}
-              renderItem={({ item }) => <Article article={item} />}
-              keyExtractor={item => item.url}
-              refreshing={this.state.refreshing}
-              onRefresh={this.handleRefresh.bind(this)}
-              numColumns={col}
-              key={col}
-              contentContainerStyle={{ alignItems: "center" }}
-              ListFooterComponent={this.renderFooter}
-              onEndReached={this._handleLoadMore}
-              onEndReachedThreshold={0.5}
-              onMomentumScrollBegin = { () => {this.setState({loadedMore: false})}}
-            />
-          </View>
-        </div>
+        <switch>
+          <Route exact path="/">
+            <input type="text" id="searchbar" placeholder="Search news..." name="s" ></input>
+            <div className="container">
+                <FlatList
+                  data={this.state.news}
+                  renderItem={({ item }) => <Article article={item} />}
+                  keyExtractor={item => item.url}
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.handleRefresh.bind(this)}
+                  numColumns={col}
+                  key={col}
+                  contentContainerStyle={{ alignItems: "center" }}
+                  ListFooterComponent={this.renderFooter}
+                  //onEndReached={this._handleLoadMore}
+                  //onEndReachedThreshold={0.5}
+                  //onMomentumScrollBegin = { () => {this.setState({loadedMore: false})}}
+                />
+            </div>
+          </Route>
+          <Route path="/about">
+            <About/>
+          </Route>
+          <Route path="/profile">
+            <p>Text</p>
+          </Route>
+        </switch>
       </Router>
     );
   }

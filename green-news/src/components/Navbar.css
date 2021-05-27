@@ -15,23 +15,24 @@
     justify-content: center;
     align-items: center;
     height: 80px;
-    border-bottom: 5px solid #636341;
+    background-color: #25395D;
+    border-bottom: 5px solid #25395D;
   }
   
   .navbar-logo {
-    color: #000;
+    color: #FBF4E6;
+    font: 24px Roboto;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
     text-decoration: none;
-    font-size: 2rem;
     display: flex;
     align-items: center;
     transition: color 250ms;
   }
 
   .navbar-logo:hover {
-    color: #636341;
+    color: #4EA4A0;
   }
 
   .nav-menu {
@@ -53,12 +54,12 @@
   .styled-link {
     font: lighter 24px Roboto;
     text-decoration: none;
-    color: #000;
+    color: #FBF4E6;
     padding: 2px 6px 2px 6px;
     transition: border-bottom 150ms;
 
   }
 
   .styled-link:hover {
-    border-bottom: 5px solid #636341;
+    border-bottom: 5px solid #4EA4A0;
   }
