@@ -51,7 +51,22 @@
 .foot {
     display: flex;
     position: absolute;
+    align-items: center;
+    width: 400px;
     margin: 10px;
     bottom: 0;
     gap: 20px;
+}
+
+.twitter {
+    color: gray;
+    text-align: right;
+    transition: color 150ms;
+    justify-content: end;
+    float: right;
+
+}
+
+.twitter:hover {
+    color: #1DA1F2
 }

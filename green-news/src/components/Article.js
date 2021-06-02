@@ -1,10 +1,13 @@
 import React from 'react';
 import moment from 'moment';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import { TwitterShareButton, ShareCounts, generateShareIcon, } from 'react-share';
 import './Article.css'
 
 export default class Article extends React.Component {
 
     render() {
+
         const {
             title, 
             description,
@@ -26,6 +29,12 @@ export default class Article extends React.Component {
                 <div className="foot">
                     <h6 className="foot-text">{source.name.toUpperCase()}</h6>
                     <h6 className="foot-text">{time}</h6>
+                    {/* <a href={"https://twitter.com"} target="_blank" className="twitter">
+                        <TwitterIcon style={{ height: '40', width: '40' }}/>
+                    </a> */}
+                    <TwitterShareButton url={url} title={title}>
+                        <TwitterIcon className="twitter" style={{ height: '40', width: '40' }}/>
+                    </TwitterShareButton>
                 </div>
             </a>
         )
