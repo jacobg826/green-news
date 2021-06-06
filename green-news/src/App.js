@@ -10,14 +10,18 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import SearchIcon from '@material-ui/icons/Search';
 import './App.css';
 
 export class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { news: [], refreshing: true, pageNum: 1, loadedMore: false };
+    this.state = { news: [], refreshing: true, pageNum: 1, loadedMore: false, query: "" };
     this.fetchNews = this.fetchNews.bind(this);
+
+    this.handleChangeSearch = this.handleChangeSearch.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -26,8 +30,8 @@ export class App extends React.Component {
 
   fetchNews() {
     var currentNews = this.state.news;
-    getNews(this.state.pageNum)
-      .then(articles => this.setState({ news: currentNews.concat(articles), refreshing: false, loadedMore: false}))
+    getNews(this.state.pageNum, this.state.query)
+      .then(articles => this.setState({ news: articles, refreshing: false, loadedMore: false}))
       .catch(() => this.setState({ refreshing: false, loadedMore: false }));
   }
 
@@ -50,6 +54,17 @@ export class App extends React.Component {
     );
   };
 
+  handleSearch() { 
+    this.setState(
+      {refreshing: true},
+      () => this.fetchNews()
+    );
+  };
+
+  handleChangeSearch(event) {
+    this.setState({query: event.target.value});
+  };
+
   renderFooter = () => {
     if (this.state.refreshing) {
       return <ActivityIndicator size="large" />;
@@ -67,7 +82,10 @@ export class App extends React.Component {
         <Navbar/>
         <switch>
           <Route exact path="/">
-            <input type="text" id="searchbar" placeholder="Search news..." name="s" ></input>
+            <div className="search-container">
+              <input value={this.state.query} onChange={this.handleChangeSearch} type="text" id="searchbar" placeholder="Search news..." name="s" className="search"></input>
+              <button className="search-button" onClick={this.handleSearch}><SearchIcon/></button>
+            </div>
             <div className="container">
                 <FlatList
                   data={this.state.news}
