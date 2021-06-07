@@ -1,5 +1,6 @@
 .card {
     width: 400px;
+    max-width: 80vw;
     height: 500px;
     margin: 20px;
     transition: opacity 150ms;
@@ -10,12 +11,13 @@
 }
 
 .card:hover {
-    opacity: 50%;
+    opacity: 0.9;
 }
 
 .image {
     display: block;
     width: 400px;
+    max-width: 80vw;
     height: 200px;
     object-fit: cover;
     border-top-left-radius: 10px;
@@ -24,6 +26,7 @@
 
 .title {
     width: 380px;
+    max-width: 75vw;
     font-family: 'Roboto Condensed', sans-serif;
     margin: 10px;
     color: #382C1A;
@@ -33,6 +36,7 @@
 
 .description {
     width: 380px;
+    max-width: 75vw;
     margin: 10px;
     position: absolute;
     top: 300px;
@@ -53,6 +57,7 @@
     position: absolute;
     align-items: center;
     width: 400px;
+    max-width: 80vw;
     margin: 10px;
     bottom: 0;
     gap: 20px;
