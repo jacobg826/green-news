@@ -12,23 +12,23 @@ export default class Article extends React.Component {
         const {
             title, 
             description,
-            publishedAt,
-            source,
-            urlToImage,
+            published,
+            author,
+            image,
             url
         } = this.props.article;
-        const time = moment(publishedAt || moment.now()).fromNow();
+        const time = moment(published || moment.now()).fromNow();
         const defaultImg = 'https://wallpaper.wiki/wp-content/uploads/2017/04/wallpaper.wiki-Images-HD-Diamond-Pattern-PIC-WPB009691.jpg';
 
 
         return(
         
             <a href={url} target="_blank" className="card">
-                <img src={urlToImage || defaultImg} className="image"/>
+                <img src={image || defaultImg} className="image"/>
                 <h3 className="title">{title}</h3>
                 <h4 className="description">{description || "Read more..."}</h4>
                 <div className="foot">
-                    <h6 className="foot-text">{source.name.toUpperCase()}</h6>
+                    {/* <h6 className="foot-text">{author.toUpperCase()}</h6> */}
                     <h6 className="foot-text">{time}</h6>
                     <TwitterShareButton url={url} title={title} hashtags={["earthnews"]}>
                         <TwitterIcon className="twitter" style={{ height: '40', width: '40' }}/>
